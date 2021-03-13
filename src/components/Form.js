@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Question from './Question';
 
+
 const mainApiUrl = 'https://opentdb.com/api.php?amount=10';
 
 const Form = () => {
@@ -33,7 +34,7 @@ const Form = () => {
   return (
     <>
       {gameOver ? (
-        <h1>You Score{correctAnswerCounter}</h1>
+        <h2 >You Score{correctAnswerCounter}</h2>
       ) : (
         questions[questionsCount] &&
         questions[questionsCount].incorrect_answers && (
