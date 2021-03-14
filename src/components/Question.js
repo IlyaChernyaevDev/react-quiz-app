@@ -8,27 +8,36 @@ const Question = ({
   answerHandler,
 }) => {
   const allAnswers = [correct_answer, ...incorrect_answers].sort();
+
   return (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '2rem',
+        justifyContent: 'space-between',
+      }}
+    >
       <h2
         style={{
+          marginTop: '0',
           marginBottom: '2rem',
           lineHeight: '1.5',
           textTransform: 'none',
         }}
       >
-        {question.replace(/&quot;/g, '"')}
+        {question}
       </h2>
       <Grid container>
         {allAnswers.map((answer, index) => {
           return (
             <Grid item xs={12} sm={6}>
               <Button
-                variant='contained'
-                color='primary'
+                style={{margin: '10px'}}
+                width='90%'
+                variant='outlined'
                 key={index}
                 onClick={(e) => answerHandler(e.target.value)}
-                value={answer}
               >
                 {answer}
               </Button>
@@ -36,7 +45,7 @@ const Question = ({
           );
         })}
       </Grid>
-    </>
+    </div>
   );
 };
 
