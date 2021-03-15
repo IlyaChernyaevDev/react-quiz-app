@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Button } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 
 const Question = ({
   question,
@@ -33,11 +33,12 @@ const Question = ({
           return (
             <Grid item xs={12} sm={6}>
               <Button
-                style={{margin: '10px'}}
+                style={{ margin: '10px' }}
                 width='90%'
                 variant='outlined'
                 key={index}
-                onClick={(e) => answerHandler(e.target.value)}
+                value={answer}
+                onClick={(e) => answerHandler(e.currentTarget.value)}
               >
                 {answer}
               </Button>
