@@ -1,10 +1,13 @@
 import './App.css';
+import React, { useState } from 'react';
+import AllQuestions from './components/AllQuestions';
 import Form from './components/Form';
-function App() {
 
+function App() {
+  const [formSumbit, setFormSubmit] = useState(false);
   return (
     <>
-      <Form/>
+      {formSumbit ? <AllQuestions /> : <Form />} 
     </>
   );
 }

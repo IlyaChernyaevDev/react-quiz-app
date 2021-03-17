@@ -1,85 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { decode } from 'html-entities';
-import Question from './Question';
+import React, { useState } from 'react';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import { Button } from '@material-ui/core';
 
 const Form = () => {
-  const [url, setUrl] = useState('https://opentdb.com/api.php?amount=1');
-  const [gameOver, setGameOver] = useState(false);
-  const [questions, setQuestions] = useState([]);
-  const [questionsCount, setQuestionsCount] = useState(0);
-  const [correctAnswerCounter, setCorrectAnswerCounter] = useState(0);
+  const [formData, setFormData] = useState({ category: '', difficulty: '' });
 
-  const getQuestions = async () => {
-    const response = await fetch(url);
-    const questions = await response.json();
-    const fillterArray = replaceAllSpecialCharacters(questions.results);
-    setQuestions(fillterArray);
+  const handleChange = (event) => {
+    const propName = event.target.name;
+    const value = event.target.value
+    setFormData({ ...formData, [propName]: value });
   };
-
-  const replaceAllSpecialCharacters = (array) => {
-    if (Array.isArray(array)) {
-      return array.map(
-        ({
-          question,
-          correct_answer,
-          incorrect_answers,
-          ...otherPropertis
-        }) => {
-          return {
-            question: decode(question),
-            correct_answer: decode(correct_answer),
-            incorrect_answers: incorrect_answers.map((answer) => {
-              return decode(answer);
-            }),
-            ...otherPropertis,
-          };
-        }
-      );
-    }
-  };
-
-  const answerHandler = (answer) => {
-    const corrcetAnswer = questions[questionsCount].correct_answer;
-    setQuestionsCount(questionsCount + 1);
-    console.log(corrcetAnswer);
-    console.log(answer);
-
-    if (answer === corrcetAnswer) {
-      setCorrectAnswerCounter(correctAnswerCounter + 1);
-    }
-    if (questionsCount >= questions.length - 1) {
-      setGameOver(true);
-    }
-  };
-
-  useEffect(() => {
-    getQuestions();
-    replaceAllSpecialCharacters();
-  }, []);
 
   return (
-    <>
-      {gameOver ? (
-        <div>
-          <h2>You Score {correctAnswerCounter}</h2>
-          <button
-            onClick={() => {
-              setUrl('https://opentdb.com/api.php?amount=11');
-            }}
-          >
-            play again
-          </button>
-        </div>
-      ) : (
-        questions[questionsCount] &&
-        questions[questionsCount].incorrect_answers && (
-          <Question
-            {...questions[questionsCount]}
-            answerHandler={answerHandler}
-          />
-        )
-      )}
-    </>
+    <form style={{ display: 'flex', flexDirection: 'column' }}>
+      <FormControl style={{ width: '500px', margin: '10px auto 10px auto' }}>
+        <InputLabel shrink htmlFor='age-native-label-placeholder'>
+          Select Category:
+        </InputLabel>
+        <Select name='category' native onChange={handleChange}>
+          <option value=''>Any Category</option>
+          <option value={9}>General Knowledge</option>
+          <option value={10}>Entertainment: Film</option>
+          <option value={11}>Entertainment: Music</option>
+        </Select>
+      </FormControl>
+      <FormControl style={{ width: '500px', margin: '10px auto 10px auto' }}>
+        <InputLabel shrink htmlFor='age-native-label-placeholder'>
+          Select Difficulty:
+        </InputLabel>
+        <Select name='difficulty' native onChange={handleChange}>
+          <option value=''>Any Difficulty</option>
+          <option value={'easy'}>Easy</option>
+          <option value={'medium'}>Medium</option>
+          <option value={'hard'}>Hard</option>
+        </Select>
+      </FormControl>
+      <Button
+        style={{ marginBottom: '10px' }}
+        onClick={(e) => console.log('ok')}
+      >
+        Submit
+      </Button>
+    </form>
   );
 };
 
