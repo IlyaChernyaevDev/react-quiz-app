@@ -9,35 +9,6 @@ const AllQuestions = () => {
   const [questionsCount, setQuestionsCount] = useState(0);
   const [correctAnswerCounter, setCorrectAnswerCounter] = useState(0);
 
-  const getQuestions = async () => {
-    const response = await fetch(url);
-    const questions = await response.json();
-    const fillterArray = replaceAllSpecialCharacters(questions.results);
-    setQuestions(fillterArray);
-  };
-
-  const replaceAllSpecialCharacters = (array) => {
-    if (Array.isArray(array)) {
-      return array.map(
-        ({
-          question,
-          correct_answer,
-          incorrect_answers,
-          ...otherPropertis
-        }) => {
-          return {
-            question: decode(question),
-            correct_answer: decode(correct_answer),
-            incorrect_answers: incorrect_answers.map((answer) => {
-              return decode(answer);
-            }),
-            ...otherPropertis,
-          };
-        }
-      );
-    }
-  };
-
   const answerHandler = (answer) => {
     const corrcetAnswer = questions[questionsCount].correct_answer;
     setQuestionsCount(questionsCount + 1);
@@ -51,11 +22,6 @@ const AllQuestions = () => {
       setGameOver(true);
     }
   };
-
-  useEffect(() => {
-    getQuestions();
-    replaceAllSpecialCharacters();
-  }, []);
 
   return (
     <>
