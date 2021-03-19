@@ -18,7 +18,7 @@ const Question = ({
         justifyContent: 'space-between',
       }}
     >
-      <h2
+      <p
         style={{
           marginTop: '0',
           marginBottom: '2rem',
@@ -27,7 +27,7 @@ const Question = ({
         }}
       >
         {question}
-      </h2>
+      </p>
       <Grid container>
         {allAnswers.map((answer) => {
           return (

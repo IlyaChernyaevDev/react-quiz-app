@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useState } from 'react';
-import AllQuestions from './components/AllQuestions';
-import Form from './components/Form';
+import QuestionProcessor from './components/QuestionProcessor/QuestionProcessor';
+import Form from './components/Form/Form';
 
 function App() {
   const [formSumbit, setFormSubmit] = useState(false);
@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       {formSumbit ? (
-        <AllQuestions
+        <QuestionProcessor
           {...formData}
           setFormSubmit={setFormSubmit}
           setFormData={setFormData}

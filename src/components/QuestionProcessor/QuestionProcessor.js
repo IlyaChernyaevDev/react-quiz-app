@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Question from './Question';
+import Question from '../Question/Question';
 import { Button } from '@material-ui/core';
-import { useFetch } from '../hooks/useFetch';
+import { useFetch } from '../../hooks/useFetch';
 
-const AllQuestions = ({category, difficulty, setFormSubmit, setFormData}) => {
+const QuestionProcessor = ({category, difficulty, setFormSubmit, setFormData}) => {
   const mainUrl = 'https://opentdb.com/api.php?amount=10';
   const { loading, questions } = useFetch(updateUrl(mainUrl));
   const [gameOver, setGameOver] = useState(false);
@@ -67,4 +67,4 @@ const AllQuestions = ({category, difficulty, setFormSubmit, setFormData}) => {
   );
 };
 
-export default AllQuestions;
+export default QuestionProcessor;

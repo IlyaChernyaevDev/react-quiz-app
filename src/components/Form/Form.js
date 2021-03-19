@@ -5,7 +5,6 @@ import Select from '@material-ui/core/Select';
 import { Button } from '@material-ui/core';
 
 const Form = ({ setFormData, setFormSubmit }) => {
-  
   const handleChange = (event) => {
     const propName = event.target.name;
     const value = event.target.value;
@@ -18,8 +17,8 @@ const Form = ({ setFormData, setFormSubmit }) => {
   };
 
   return (
-    <form style={{ display: 'flex', flexDirection: 'column' }}>
-      <FormControl style={{ width: '500px', margin: '10px auto 10px auto' }}>
+    <form style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
+      <FormControl style={{ width: '90%', margin: '10px auto 10px auto' }}>
         <InputLabel shrink htmlFor='age-native-label-placeholder'>
           Select Category:
         </InputLabel>
@@ -30,7 +29,7 @@ const Form = ({ setFormData, setFormSubmit }) => {
           <option value={11}>Entertainment: Music</option>
         </Select>
       </FormControl>
-      <FormControl style={{ width: '500px', margin: '10px auto 10px auto' }}>
+      <FormControl style={{ width: '90%', margin: '10px auto 10px auto' }}>
         <InputLabel shrink htmlFor='age-native-label-placeholder'>
           Select Difficulty:
         </InputLabel>
