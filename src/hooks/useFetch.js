@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
+import { decode } from 'html-entities';
 
-const useFetch = (url) => {
+export const useFetch = (url) => {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState([]);
 
@@ -8,6 +9,7 @@ const useFetch = (url) => {
     const response = await fetch(url);
     const questions = await response.json();
     const fillterArray = replaceAllSpecialCharacters(questions.results);
+    console.log(questions);
     setQuestions(fillterArray);
     setLoading(false);
   }, [url]);

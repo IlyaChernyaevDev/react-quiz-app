@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { Button } from '@material-ui/core';
 
-const Form = () => {
-  const [formData, setFormData] = useState({ category: '', difficulty: '' });
-
+const Form = ({ setFormData, setFormSubmit }) => {
+  
   const handleChange = (event) => {
     const propName = event.target.name;
-    const value = event.target.value
-    setFormData({ ...formData, [propName]: value });
+    const value = event.target.value;
+    setFormData((formData) => {
+      return {
+        ...formData,
+        [propName]: value,
+      };
+    });
   };
 
   return (
@@ -39,7 +43,7 @@ const Form = () => {
       </FormControl>
       <Button
         style={{ marginBottom: '10px' }}
-        onClick={(e) => console.log('ok')}
+        onClick={() => setFormSubmit(true)}
       >
         Submit
       </Button>

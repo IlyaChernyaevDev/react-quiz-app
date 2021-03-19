@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { decode } from 'html-entities';
+import React, { useState } from 'react';
 import Question from './Question';
+import { Button } from '@material-ui/core';
+import { useFetch } from '../hooks/useFetch';
 
-const AllQuestions = () => {
-  const [url, setUrl] = useState('https://opentdb.com/api.php?amount=1');
+const AllQuestions = ({category, difficulty, setFormSubmit, setFormData}) => {
+  const mainUrl = 'https://opentdb.com/api.php?amount=10';
+  const { loading, questions } = useFetch(updateUrl(mainUrl));
   const [gameOver, setGameOver] = useState(false);
-  const [questions, setQuestions] = useState([]);
   const [questionsCount, setQuestionsCount] = useState(0);
   const [correctAnswerCounter, setCorrectAnswerCounter] = useState(0);
 
@@ -23,18 +24,35 @@ const AllQuestions = () => {
     }
   };
 
+  function updateUrl(url) {
+    let newUrl = url;
+    if(category !== '') {
+      newUrl += `&category=${category}`;
+    } 
+    if(difficulty !== '') {
+      newUrl += `&difficulty=${difficulty}`;
+    }
+    console.log(newUrl);
+    return newUrl;
+  }
+
   return (
     <>
-      {gameOver ? (
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : gameOver ? (
         <div>
-          <h2>You Score {correctAnswerCounter}</h2>
-          <button
+          <h2>Correct answers {correctAnswerCounter}/10</h2>
+          <Button
+            variant='outlined'
+            style={{ margin: '10px' }}
             onClick={() => {
-              setUrl('https://opentdb.com/api.php?amount=11');
+              setFormSubmit(false);
+              setFormData({ category: '', difficulty: '' });
             }}
           >
             play again
-          </button>
+          </Button>
         </div>
       ) : (
         questions[questionsCount] &&

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Button } from '@material-ui/core';
+import { v4 as uuidv4 } from 'uuid';
 
 const Question = ({
   question,
@@ -8,7 +9,6 @@ const Question = ({
   answerHandler,
 }) => {
   const allAnswers = [correct_answer, ...incorrect_answers].sort();
-
   return (
     <div
       style={{
@@ -29,14 +29,14 @@ const Question = ({
         {question}
       </h2>
       <Grid container>
-        {allAnswers.map((answer, index) => {
+        {allAnswers.map((answer) => {
           return (
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} key={uuidv4()}>
               <Button
                 style={{ margin: '10px' }}
                 width='90%'
                 variant='outlined'
-                key={index}
+                key={uuidv4()}
                 value={answer}
                 onClick={(e) => answerHandler(e.currentTarget.value)}
               >

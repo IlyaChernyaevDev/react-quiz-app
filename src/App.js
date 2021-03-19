@@ -5,9 +5,19 @@ import Form from './components/Form';
 
 function App() {
   const [formSumbit, setFormSubmit] = useState(false);
+  const [formData, setFormData] = useState({ category: '', difficulty: '' });
+
   return (
     <>
-      {formSumbit ? <AllQuestions /> : <Form />} 
+      {formSumbit ? (
+        <AllQuestions
+          {...formData}
+          setFormSubmit={setFormSubmit}
+          setFormData={setFormData}
+        />
+      ) : (
+        <Form setFormData={setFormData} setFormSubmit={setFormSubmit} />
+      )}
     </>
   );
 }
