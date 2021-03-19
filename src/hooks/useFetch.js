@@ -9,7 +9,6 @@ export const useFetch = (url) => {
     const response = await fetch(url);
     const questions = await response.json();
     const fillterArray = replaceAllSpecialCharacters(questions.results);
-    console.log(questions);
     setQuestions(fillterArray);
     setLoading(false);
   }, [url]);

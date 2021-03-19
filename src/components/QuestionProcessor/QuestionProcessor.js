@@ -13,8 +13,6 @@ const QuestionProcessor = ({category, difficulty, setFormSubmit, setFormData}) =
   const answerHandler = (answer) => {
     const corrcetAnswer = questions[questionsCount].correct_answer;
     setQuestionsCount(questionsCount + 1);
-    console.log(corrcetAnswer);
-    console.log(answer);
 
     if (answer === corrcetAnswer) {
       setCorrectAnswerCounter(correctAnswerCounter + 1);
@@ -32,7 +30,6 @@ const QuestionProcessor = ({category, difficulty, setFormSubmit, setFormData}) =
     if(difficulty !== '') {
       newUrl += `&difficulty=${difficulty}`;
     }
-    console.log(newUrl);
     return newUrl;
   }
 
